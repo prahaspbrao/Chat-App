@@ -1,4 +1,8 @@
 import express  from "express"
+import dotenv from "dotenv"
+
+
+const port = process.env.PORT;
 
 const app = express();
 
@@ -7,5 +11,5 @@ app.get("/hi" , (req , res) =>{
 })
 
 
-app.listen(3000 , () => console.log("server is running on this port 3000 "));
+app.listen(port , () => console.log("server is running on this port 3000 "));
 
