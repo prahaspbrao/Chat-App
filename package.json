@@ -17,5 +17,8 @@
     "url": "https://github.com/prahaspbrao/Chat-App/issues"
   },
   "homepage": "https://github.com/prahaspbrao/Chat-App#readme",
-  "description": ""
+  "description": "",
+  "engines": {
+    "node": ">=20.0.0"
+  }
 }
