@@ -13,6 +13,7 @@ const __dirname = path.resolve();
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use("/api/auth", AuthRoute);
