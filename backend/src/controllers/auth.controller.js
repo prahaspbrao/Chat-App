@@ -33,7 +33,7 @@ export const signup =  async (req , res) =>{
         const newUser = new User({
             fullName,
             email,
-            password : hashedPassedPassword
+            password:hashedPassedPassword
         })
 
         if(newUser){
@@ -55,3 +55,5 @@ export const signup =  async (req , res) =>{
         res.status(500).json({message : "Internal Server error"});
     }
 }
+
+export default signup;
