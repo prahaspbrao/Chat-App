@@ -5,8 +5,7 @@ import AuthRoute from "./routes/auth.route.js";
 import messageRoute from "./routes/message.route.js";
 import { connectDB } from "./lib/db.js";
 import cors from "cors";
-
-dotenv.config();
+import { ENV } from "./lib/env.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -29,7 +28,7 @@ app.use("/api/auth", AuthRoute);
 app.use("/api/messages", messageRoute);
 
 // Production deployment setup
-if (process.env.NODE_ENV === "production") {
+if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
   app.get("*", (_, res) => {
