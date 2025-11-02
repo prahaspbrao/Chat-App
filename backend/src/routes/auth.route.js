@@ -9,12 +9,8 @@ router.get("", (req , res) =>{
     res.send("Home Page");
 })
 
-router.get("/login" , (req , res) =>{
-    res.send("Login endPoint!!");
-})
+router.post("/login" , login)
 
-router.get("/logout" , (req , res) =>{
-    res.send("Logout endPoint!!");
-})
+router.post("/logout" , logout)
 
 export default router;
