@@ -6,6 +6,7 @@ import messageRoute from "./routes/message.route.js";
 import { connectDB } from "./lib/db.js";
 import cors from "cors";
 import { ENV } from "./lib/env.js";
+import cookieParser from "cookie-parser"
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,6 +14,7 @@ const __dirname = path.resolve();
 
 // Middleware
 app.use(express.json());
+app.use(cookieParser())
 // app.use(
 //   cors({
 //     origin: "*",
