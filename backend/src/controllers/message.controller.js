@@ -41,6 +41,22 @@ export const sendMessage = async (req, res) => {
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
+    if(!text || !image){
+        return res.status(400).json({messages : "Cannot send messages to yourself!!"});
+    }
+
+    if(senderId.equals(receiverId)){
+        return res.status(400).json({messages : "Cannot send message to yourself"});
+    }
+
+    const receiverExist = await User.exists({_id : receiverId});
+
+    if(!receiverExist){
+        return res.status(404).json({messages : "Receiver not found."});
+    }
+
+
+
     let imageUrl;
 
     if (image) {
