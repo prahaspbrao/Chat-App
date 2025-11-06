@@ -15,8 +15,7 @@ const __dirname = path.resolve();
 // Middleware
 app.use(express.json());
 app.use(cookieParser())
-
-app.options("*", cors());
+app.use(cors({origin : ENV.CLIENT_URL , credentials : true}))
 
 // Routes
 app.use("/api/auth", AuthRoute);
