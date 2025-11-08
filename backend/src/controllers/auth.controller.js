@@ -6,8 +6,6 @@ import { ENV } from "../lib/env.js";
 import cloudinary from "../lib/cloudinary.js";
 
 export const signup = async (req, res) => {
-
-   console.log("REQ BODY:", req.body);  
   const { fullName, email, password } = req.body;
 
   try {
@@ -98,10 +96,25 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = async (_, res) => {
-  res.cookie("jwt", "", { maxAge: 0 });
-  res.status(200).json({ message: "Logged out successfully" });
+export const logout = (req, res) => {
+
+  console.log(">>> LOGOUT CALLED");
+  console.log(">>> Incoming Cookies:", req.cookies);
+
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+    path: "/",
+    expires: new Date(0),
+  });
+
+  console.log(">>> Logout cookie cleared");
+
+  return res.status(200).json({ message: "Logged out successfully" });
 };
+
+
 
 export const updateProfile = async (req, res) => {
   try {

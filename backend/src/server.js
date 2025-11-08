@@ -9,18 +9,18 @@ import { ENV } from "./lib/env.js";
 import cookieParser from "cookie-parser"
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = ENV.PORT || 3000;
 const __dirname = path.resolve();
 
 // Middleware
-app.use(express.json());
-app.use(cookieParser())
 app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
   })
 );
+app.use(express.json());
+app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", AuthRoute);
@@ -35,8 +35,10 @@ if (ENV.NODE_ENV === "production") {
   });
 }
 
+const HOST = "localhost"; 
+
 // Server start
-app.listen(port, () => {
+app.listen(port,HOST ,  () => {
   console.log(
     `✅ Server running on port ${port}\n👉 http://localhost:${port}/`
   );
