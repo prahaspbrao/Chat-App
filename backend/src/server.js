@@ -36,7 +36,7 @@ if (ENV.NODE_ENV === "production") {
   });
 }
 
-const HOST = "localhost"; 
+const HOST = "0.0.0.0"; 
 
 // Server start
 app.listen(port,HOST ,  () => {
