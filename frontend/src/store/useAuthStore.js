@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import axiosInstance  from "../lib/axios.js";
+import axiosInstance from "../lib/axios.js";
 import toast from "react-hot-toast";
 
 export const useAuthStore = create((set) => ({
@@ -8,18 +8,17 @@ export const useAuthStore = create((set) => ({
   isSigningUp: false,
   isLoggingIn: false,
 
-checkAuth: async () => {
-  try {
-    const res = await axiosInstance.get("/auth/check");
-    set({ authUser: res.data });
-  } catch (error) {
-    console.log("Error in auth Check : ", error);
-    set({ authUser: null });
-  } finally {
-    set({ isChekingAuth: false });
-  }
-},
-
+  checkAuth: async () => {
+    try {
+      const res = await axiosInstance.get("/auth/check");
+      set({ authUser: res.data });
+    } catch (error) {
+      console.log("Error in auth Check : ", error);
+      set({ authUser: null });
+    } finally {
+      set({ isChekingAuth: false });
+    }
+  },
 
   signup: async (data) => {
     try {
@@ -56,12 +55,23 @@ checkAuth: async () => {
   },
 
   logout: async () => {
-  try {
-    await axiosInstance.post("/auth/logout");
-    set({ authUser: null });
-  } catch (error) {
-    console.log("Logout error:", error);
-  }
-},
+    try {
+      await axiosInstance.post("/auth/logout");
+      set({ authUser: null });
+    } catch (error) {
+      console.log("Logout error:", error);
+    }
+  },
 
+  updateProfile: async (data) => {
+    try {
+      const res = await axiosInstance.put("/auth/update-profile", data);
+      toast.success("Profile Updated successfully!!");
+      set({ authUser: res.data });
+    } catch (error) {
+      console.log("Error in update profile , ", error);
+      toast.error(error.response.data.message)
+      
+    }
+  },
 }));
