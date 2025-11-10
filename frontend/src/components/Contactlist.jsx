@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React ,{ useEffect } from "react";
 import useChatStore from "../store/useChatStore";
 import UsersLoadingSkeleton from "./UsersLoadingSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
@@ -39,4 +39,4 @@ function ContactList() {
   );
 }
 
-export default ContactList;
+export default React.memo(ContactList);

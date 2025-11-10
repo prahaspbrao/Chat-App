@@ -8,8 +8,8 @@ function ChatsList() {
     useChatStore();
 
   useEffect(() => {
-    getMyChatPartners();
-  }, []);  // ✅ Important: no dependencies
+  getMyChatPartners();
+}, []);  // ✅ Fetch only once
 
   if (isUsersLoading) return <UsersLoadingSkeleton />;
 
@@ -45,4 +45,4 @@ function ChatsList() {
 );
 }
 
-export default ChatsList;
+export default React.memo(ChatsList);
