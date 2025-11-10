@@ -41,9 +41,10 @@ export const sendMessage = async (req, res) => {
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
-    if(!text || !image){
-        return res.status(400).json({messages : "Cannot send messages to yourself!!"});
-    }
+    if (!text && !image) {
+  return res.status(400).json({ message: "Message cannot be empty" });
+}
+
 
     if(senderId.equals(receiverId)){
         return res.status(400).json({messages : "Cannot send message to yourself"});

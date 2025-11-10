@@ -3,7 +3,7 @@ import useChatStore  from "../store/useChatStore.js";
 import ProfileHeader from "../components/ProfileHeader.jsx";
 import ActiveTabSwitch from "../components/ActiveTabSwitch.jsx";
 import ChatList from "../components/ChatsList.jsx";
-import Contactlist from "../components/ChatsList.jsx";
+import ContactList from "../components/Contactlist.jsx";
 import NoConversationPlaceholder from "../components/NoConversationPlaceholder.jsx"
 import ChatContainer from "../components/ChatContainer.jsx";
 
@@ -19,7 +19,7 @@ function ChatPage() {
           <ActiveTabSwitch />
 
           <div className="flex-1 overflow-y-auto p-4 space-y-2 ">
-            {activeTab === "chats" ? <ChatList /> : <Contactlist />}
+            {activeTab === "chats" ? <ChatList /> : <ContactList />}
           </div>
         </div>
 

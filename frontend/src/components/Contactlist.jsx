@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
-import useChatStore from "../store/useChatStore.js";
-import UsersLoadingSkeleton from "./UsersLoadingSkeleton.js";
+import { useEffect } from "react";
+import useChatStore from "../store/useChatStore";
+import UsersLoadingSkeleton from "./UsersLoadingSkeleton";
+import { useAuthStore } from "../store/useAuthStore";
 
-function Contactlist() {
-  const { getAllContacts, allContacts, setSelectedUser, isUserLoading } =
+function ContactList() {
+  const { getAllContacts, allContacts, setSelectedUser, isUsersLoading } =
     useChatStore();
 
-    
-    
-    useEffect(() => {
-      getAllContacts();
-    }, []); // run only once
-    
-    console.log("contacts:", allContacts, "loading:", isUserLoading);
-  if (isUserLoading) {
-    return <UsersLoadingSkeleton />;
-  }
+  const { onlineUsers = [] } = useAuthStore();  // ✅ fallback to empty array
+
+  useEffect(() => {
+    getAllContacts();
+  }, []);
+
+  if (isUsersLoading) return <UsersLoadingSkeleton />;
 
   return (
     <>
@@ -26,19 +24,19 @@ function Contactlist() {
           onClick={() => setSelectedUser(contact)}
         >
           <div className="flex items-center gap-3">
-            <div className="avatar-online">
-              <div className="size-12 rounded-full">
-                <img src={contact.profilePic || "/avatar.png"} />
+
+            <div className={`avatar ${onlineUsers.includes(contact._id) ? "online" : "offline"}`}>
+              <div className="w-12 rounded-full ring ring-cyan-400/20">
+                <img src={contact.profilePic || "/avatar.png"} alt={contact.fullName} />
               </div>
             </div>
+
+            <h4 className="text-slate-200 font-medium">{contact.fullName}</h4>
           </div>
-          <h4 className="text-slate-200 font-medium truncate">
-            {contact.fullName}
-          </h4>
         </div>
       ))}
     </>
   );
 }
 
-export default Contactlist;
+export default ContactList;
