@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { use, useEffect , useRef } from "react";
 import useChatStore from "../store/useChatStore.js";
 import { useAuthStore } from "../store/useAuthStore.js";
 import ChatHeader from "./ChatHeader.jsx";
@@ -9,6 +9,14 @@ import MessagesLoadingSkeleton from "./MessagesLoadingSkeleton.jsx";
 function ChatContainer() {
   const { getMessagesByUserId, messages, selectedUser , isMessagesLoading } = useChatStore();
   const { authUser } = useAuthStore();
+
+  const messageEndRef = useRef(null);
+
+  useEffect(() =>{
+    if(messageEndRef.current){
+      messageEndRef.current.scrollIntoView({behavior : "smooth"})
+    }
+  } , [messages])
 
   useEffect(() => {
     if (selectedUser?._id) {
@@ -57,6 +65,7 @@ function ChatContainer() {
                 </div>
               </div>
             ))}
+            <div ref={messageEndRef}/>
           </div>
         ) : isMessagesLoading ? <MessagesLoadingSkeleton /> : (
           <NoChatHistoryPlaceHolder name={selectedUser.fullName} />
