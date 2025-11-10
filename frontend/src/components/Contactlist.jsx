@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react'
-import useChatStore from '../store/useChatStore.js'
-import UsersLoadingSkeleton from './UsersLoadingSkeleton.js';
+import React, { useEffect } from "react";
+import useChatStore from "../store/useChatStore.js";
+import UsersLoadingSkeleton from "./UsersLoadingSkeleton.js";
 
 function Contactlist() {
-  const {getAllContacts , allContacts , setSelectedUser , isUserLoading } = useChatStore();
+  const { getAllContacts, allContacts, setSelectedUser, isUserLoading } =
+    useChatStore();
 
-  useEffect( () => {
-      getAllContacts()
-  } , [getAllContacts]);
-
-  if(isUserLoading){
-    return <UsersLoadingSkeleton />
+    
+    
+    useEffect(() => {
+      getAllContacts();
+    }, []); // run only once
+    
+    console.log("contacts:", allContacts, "loading:", isUserLoading);
+  if (isUserLoading) {
+    return <UsersLoadingSkeleton />;
   }
 
   return (
@@ -22,18 +26,19 @@ function Contactlist() {
           onClick={() => setSelectedUser(contact)}
         >
           <div className="flex items-center gap-3">
-            {/* todo fix this online status and make it work with socket */}
-            <div className={`avatar-online`}>
+            <div className="avatar-online">
               <div className="size-12 rounded-full">
-                <img src={contact.profilePic || "/avatar.pmg"} />
+                <img src={contact.profilePic || "/avatar.png"} />
               </div>
             </div>
           </div>
-          <h4 className="text-slate-200 font-medium truncate">{contact.fullName}</h4>
+          <h4 className="text-slate-200 font-medium truncate">
+            {contact.fullName}
+          </h4>
         </div>
       ))}
     </>
-  )
+  );
 }
 
-export default Contactlist
+export default Contactlist;
