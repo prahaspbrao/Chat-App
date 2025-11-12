@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router";
+import { Routes, Route, Navigate, Link } from "react-router-dom";
 import ChatPage from "./pages/ChatPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
@@ -6,6 +6,7 @@ import { useAuthStore } from "./store/useAuthStore.js";
 import { useEffect } from "react";
 import PageLoader from "./components/PageLoader.jsx";
 import { Toaster } from "react-hot-toast";
+import WelcomePage from "./pages/Welcome.jsx";
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -13,28 +14,32 @@ function App() {
   const authUser = useAuthStore((state) => state.authUser);
 
   useEffect(() => {
-    checkAuth();    // ✅ run only once
-  }, []);           // ✅ no dependencies
+    checkAuth(); // ✅ run only once
+  }, []); // ✅ no dependencies
 
   if (isChekingAuth) return <PageLoader />;
 
   return (
     <div className="min-h-screen bg-slate-900 relative flex items-center justify-center p-4 overflow-hidden">
+      {/* Background grid */}
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]" />
 
-  {/* Background grid */}
-  <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]" />
-  
-  {/* Pink glow */}
-  <div className="absolute top-0 -left-4 size-96 pointer-events-none bg-pink-500 opacity-20 blur-[100px]" />
-  
-  {/* Blue glow */}
-  <div className="absolute bottom-0 -right-4 size-96 pointer-events-none bg-cyan-500 opacity-20 blur-[100px]" />
+      {/* Pink glow */}
+      <div className="absolute top-0 -left-4 size-96 pointer-events-none bg-pink-500 opacity-20 blur-[100px]" />
 
+      {/* Blue glow */}
+      <div className="absolute bottom-0 -right-4 size-96 pointer-events-none bg-cyan-500 opacity-20 blur-[100px]" />
 
       <Routes>
-        <Route path="/" element={authUser ? <ChatPage /> : <Navigate to="/login" />} />
-        <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
-        <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
+        <Route path="/" element={authUser ? <ChatPage /> : <WelcomePage />} />
+        <Route
+          path="/login"
+          element={!authUser ? <LoginPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/signup"
+          element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
+        />
       </Routes>
 
       <Toaster />
