@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 import http from "http";
 import express from "express";
 import { ENV } from "./env.js";
-import { socketAUthMiddleware } from "../middlewares/socket.auth.middleware.js";
+import { socketAuthMiddleware } from "../middlewares/socket.auth.middleware.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -15,7 +15,7 @@ const io = new Server(server, {
 });
 
 // apply authentication middlewares to socket connections
-io.use(socketAUthMiddleware);
+io.use(socketAuthMiddleware);
 
 const userSocketMap = {}; //{userId : socketId}
 
