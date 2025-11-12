@@ -10,7 +10,7 @@ const aj = arcjet({
     }),
     slidingWindow({
       mode: "LIVE",
-      max: 10000,        // reasonable default
+      max: 1000,        // reasonable default
       interval: 60,    // per minute
       identity: "ip",  // per IP rate limit
     }),
