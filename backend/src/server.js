@@ -7,8 +7,8 @@ import { connectDB } from "./lib/db.js";
 import cors from "cors";
 import { ENV } from "./lib/env.js";
 import cookieParser from "cookie-parser"
+import { app , server } from "./lib/socket.js"; 
 
-const app = express();
 const port = ENV.PORT || 3000;
 const __dirname = path.resolve();
 
@@ -39,7 +39,7 @@ if (ENV.NODE_ENV === "production") {
 const HOST = "0.0.0.0"; 
 
 // Server start
-app.listen(port,HOST ,  () => {
+server.listen(port,HOST ,  () => {
   console.log(
     `✅ Server running on port ${port}\n👉 http://localhost:${port}/`
   );
