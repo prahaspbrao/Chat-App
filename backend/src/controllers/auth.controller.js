@@ -102,12 +102,12 @@ export const logout = (req, res) => {
   console.log(">>> Incoming Cookies:", req.cookies);
 
   res.cookie("jwt", "", {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-    path: "/",
-    expires: new Date(0),
-  });
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/",
+  expires: new Date(0),
+});
 
   console.log(">>> Logout cookie cleared");
 
