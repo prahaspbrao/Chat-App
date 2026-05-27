@@ -15,7 +15,7 @@ const __dirname = path.resolve();
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin:[ "http://localhost:5173", "https://chat-app-rho.vercel.app"],
     credentials: true,
   })
 );
