@@ -35,5 +35,3 @@ This project supports user authentication, private chats, and message persistenc
 
 ---
 
-## 📁 Folder Structure
-
