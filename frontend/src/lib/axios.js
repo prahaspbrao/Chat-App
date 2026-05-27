@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.MODE === "development" ? "http://localhost:3000/api" : "http://chat-app-e3t1.vercel.app//api",
+  baseURL: import.meta.env.MODE === "development" ? "https://localhost:3000/api" : "http://chat-app-e3t1.vercel.app//api",
   withCredentials: true,
 });
 
